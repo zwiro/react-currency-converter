@@ -1,0 +1,9 @@
+@use "../abstracts" as *;
+
+@each $size, $value in $sizes {
+  @each $name, $property in $margins {
+    .m#{$name}-#{$size} {
+      #{$property}: $value;
+    }
+  }
+}

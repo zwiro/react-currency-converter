@@ -1,0 +1,10 @@
+$sizes: ();
+
+@for $i from 1 through 100 {
+  $sizes: map-merge(
+    $sizes,
+    (
+      $i: calc($i / 4) * 1rem,
+    )
+  );
+}

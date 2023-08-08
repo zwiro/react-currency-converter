@@ -1,0 +1,10 @@
+@use "../abstracts" as *;
+
+@each $color-name, $color in $colors {
+  .text-#{$color-name} {
+    color: #{$color};
+  }
+  .bg-#{$color-name} {
+    background-color: #{$color};
+  }
+}

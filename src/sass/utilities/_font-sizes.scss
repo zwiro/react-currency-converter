@@ -1,0 +1,8 @@
+@use "../abstracts" as *;
+
+@each $size, $values in $font-sizes {
+  .fs-#{$size} {
+    font-size: map-get($values, "size");
+    line-height: map-get($values, "line-height");
+  }
+}
