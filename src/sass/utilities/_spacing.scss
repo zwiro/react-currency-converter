@@ -1,6 +1,11 @@
 @use "../abstracts" as *;
 
 @each $size, $value in $sizes {
+  @each $name, $property in $margins {
+    .m#{$name}-#{$size} {
+      #{$property}: $value;
+    }
+  }
   @each $name, $property in $paddings {
     .p#{$name}-#{$size} {
       #{$property}: $value;

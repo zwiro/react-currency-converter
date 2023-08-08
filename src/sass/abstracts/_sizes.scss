@@ -13,6 +13,7 @@ $loop-1-end: 12;
 }
 
 $i: 16;
+
 @while $i <= 100 {
   $sizes: map-merge(
     $sizes,
