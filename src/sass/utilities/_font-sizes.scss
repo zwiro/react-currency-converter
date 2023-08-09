@@ -1,7 +1,7 @@
-@use "../abstracts" as *;
+@use "@/sass/abstracts/typography" as *;
 
 @each $size, $values in $font-sizes {
-  .fs-#{$size} {
+  .text-#{$size} {
     font-size: map-get($values, "size");
     line-height: map-get($values, "line-height");
   }

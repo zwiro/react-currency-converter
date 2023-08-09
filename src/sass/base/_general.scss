@@ -1,7 +1,20 @@
+@use "@/sass/abstracts/colors" as *;
 @import url("https://fonts.googleapis.com/css2?family=Jura:wght@400;700&family=Krona+One&display=swap");
 
 body {
   min-height: 100vh;
   font-family: "Krona One", sans-serif;
-  background: repeating-linear-gradient(45deg, #241468 0%, #9f0d7f 15%);
+  background: linear-gradient(135deg, $dark-blue 0%, $dark-magenta 100%);
+}
+
+.heading {
+  background: linear-gradient(
+    137deg,
+    $light-pink 0%,
+    $white 50%,
+    $light-pink 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

@@ -1,4 +1,4 @@
-@use "../abstracts" as *;
+@use "@/sass/abstracts/colors" as *;
 
 @each $color-name, $color in $colors {
   .text-#{$color-name} {

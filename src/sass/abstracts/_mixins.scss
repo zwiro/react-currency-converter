@@ -21,3 +21,14 @@
     @error 'the keyword #{$size} is not in the $breakpoints map';
   }
 }
+
+@mixin input($color, $width: 15rem, $height: 4.5rem) {
+  background-color: transparent;
+  width: $width;
+  height: $height;
+}
+
+@mixin border($color, $width: 3px) {
+  border: $width solid $color;
+  box-shadow: 0px 4px 5px 2px $color;
+}

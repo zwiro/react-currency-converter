@@ -1,0 +1,6 @@
+@use "@/sass/abstracts/" as *;
+
+.select {
+  @include input($dark-blue, 4.5rem);
+  @include border($dark-blue);
+}
