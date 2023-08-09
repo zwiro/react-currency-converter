@@ -10,7 +10,7 @@ interface SelectProps
 
 const Select: React.FC<SelectProps> = ({ children, ...props }) => {
   return (
-    <select {...props} className="select | rounded text-base text-white">
+    <select {...props} className="select | rounded text-white text-sm">
       {children}
     </select>
   )

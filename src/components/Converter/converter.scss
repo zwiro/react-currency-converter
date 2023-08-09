@@ -1,16 +1,8 @@
-@use "@/sass/abstracts/colors" as *;
+@use "@/sass/abstracts/" as *;
 
 .converter {
   &__divider {
     letter-spacing: 3px;
-    background: linear-gradient(
-      115deg,
-      $light-pink 0%,
-      $white 50%,
-      $light-pink 100%
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @include text-gradient(135deg, $light-pink, $white);
   }
 }

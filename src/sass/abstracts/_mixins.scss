@@ -22,7 +22,7 @@
   }
 }
 
-@mixin input($color, $width: 15rem, $height: 4.5rem) {
+@mixin input($width: 15rem, $height: 4.5rem) {
   background-color: transparent;
   width: $width;
   height: $height;
@@ -31,4 +31,21 @@
 @mixin border($color, $width: 3px) {
   border: $width solid $color;
   box-shadow: 0px 4px 5px 2px $color;
+}
+
+@mixin gradient($deg, $color1, $color2, $num: 3) {
+  @if $num == 2 {
+    background: linear-gradient($deg, $color1, $color2);
+  } @else if $num == 3 {
+    background: linear-gradient($deg, $color1 0%, $color2 50%, $color1 100%);
+  } @else {
+    @error 'the number of colors must be 2 or 3';
+  }
+}
+
+@mixin text-gradient($deg, $color1, $color2) {
+  @include gradient($deg, $color1, $color2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
