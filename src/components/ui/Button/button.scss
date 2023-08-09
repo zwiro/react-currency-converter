@@ -1,0 +1,6 @@
+@use "@/sass/abstracts/" as *;
+
+.button {
+  width: 9rem;
+  @include border($dark-blue, 1px);
+}
