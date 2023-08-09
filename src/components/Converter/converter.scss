@@ -3,6 +3,6 @@
 .converter {
   &__divider {
     letter-spacing: 3px;
-    @include text-gradient(135deg, $light-pink, $white);
+    @include text-gradient(45deg, $light-pink, $white);
   }
 }

@@ -4,14 +4,18 @@ import ExchangeRate from "./components/ExchangeRate"
 
 function App() {
   return (
-    <main className="uppercase text-white px-9">
-      <h1 className="heading | text-center py-8 text-4xl">
-        Currency Converter.
-      </h1>
-      <Converter />
-      <ExchangeRate />
-      <ActionButtons />
-    </main>
+    <>
+      <header className="uppercase text-white">
+        <h1 className="heading | text-center py-8 text-4xl">
+          Currency Converter.
+        </h1>
+      </header>
+      <main>
+        <Converter />
+        <ExchangeRate />
+        <ActionButtons />
+      </main>
+    </>
   )
 }
 

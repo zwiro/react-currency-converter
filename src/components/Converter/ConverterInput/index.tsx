@@ -1,17 +1,16 @@
 import Input from "@/components/ui/Input"
-import Option from "@/components/ui/Option"
-import Select from "@/components/ui/Select"
+import SelectList from "@/components/ui/Select"
 import "./converter-input.scss"
 
-const ConverterInput = () => {
+interface ConverterInputProps {
+  defaultValue: string
+}
+
+const ConverterInput = ({ defaultValue }: ConverterInputProps) => {
   return (
     <div className="converter-input">
       <Input />
-      <Select>
-        <Option title="USD" />
-        <Option title="USD" />
-        <Option title="USD" />
-      </Select>
+      <SelectList defaultValue={defaultValue} />
     </div>
   )
 }

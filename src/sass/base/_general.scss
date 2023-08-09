@@ -5,6 +5,7 @@ body {
   min-height: 100vh;
   font-family: "Krona One", sans-serif;
   @include gradient(135deg, $dark-blue, $dark-magenta, 2);
+  padding-inline: 2.25rem;
 }
 
 .heading {

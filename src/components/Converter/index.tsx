@@ -4,11 +4,11 @@ import ConverterInput from "./ConverterInput"
 const Converter = () => {
   return (
     <div className="converter">
-      <ConverterInput />
-      <p className="converter__divider | uppercase text-center py-10">
+      <ConverterInput defaultValue="USD" />
+      <h2 className="converter__divider | uppercase text-center py-10">
         Is equal to
-      </p>
-      <ConverterInput />
+      </h2>
+      <ConverterInput defaultValue="EUR" />
     </div>
   )
 }
