@@ -10,7 +10,7 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
   return (
     <input
       {...props}
-      className="input | rounded text-white text-4xl"
+      className="input | rounded text-white text-4xl text-center"
       type="text"
     />
   )
