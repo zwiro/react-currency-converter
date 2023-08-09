@@ -5,12 +5,10 @@ import ExchangeRate from "./components/ExchangeRate"
 function App() {
   return (
     <>
-      <header className="uppercase text-white">
-        <h1 className="heading | text-center py-8 text-4xl">
-          Currency Converter.
-        </h1>
+      <header className="heading | uppercase text-white text-center pt-8 text-4xl">
+        <h1>Currency Converter.</h1>
       </header>
-      <main>
+      <main className="main">
         <Converter />
         <ExchangeRate />
         <ActionButtons />

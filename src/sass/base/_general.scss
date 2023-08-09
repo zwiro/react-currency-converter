@@ -8,6 +8,16 @@ body {
   padding-inline: 2.25rem;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .heading {
   @include text-gradient(135deg, $light-pink, $white);
+}
+
+.main {
+  margin-block: auto;
 }
