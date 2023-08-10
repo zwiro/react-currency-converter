@@ -1,5 +1,6 @@
+import Input from "../ui/Input"
+import SelectList from "../ui/Select"
 import "./converter.scss"
-import ConverterInput from "./ConverterInput"
 
 const Converter = () => {
   return (
@@ -9,6 +10,19 @@ const Converter = () => {
         Is equal to
       </h2>
       <ConverterInput defaultValue="EUR" />
+    </div>
+  )
+}
+
+interface ConverterInputProps {
+  defaultValue: string
+}
+
+const ConverterInput = ({ defaultValue }: ConverterInputProps) => {
+  return (
+    <div className="flex-between">
+      <Input />
+      <SelectList defaultValue={defaultValue} />
     </div>
   )
 }
