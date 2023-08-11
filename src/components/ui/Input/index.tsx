@@ -1,3 +1,4 @@
+import { useState } from "react"
 import "./input.scss"
 
 interface InputProps
@@ -7,10 +8,15 @@ interface InputProps
   > {}
 
 const Input: React.FC<InputProps> = ({ ...props }) => {
+  const [value, setValue] = useState("")
+  const fontSize =
+    value.length > 11 ? "text-base" : value.length > 7 ? "text-2xl" : "text-4xl"
   return (
     <input
       {...props}
-      className="input | rounded text-white text-center transparent text-4xl"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      className={`input | rounded text-white text-center transparent ${fontSize}`}
       type="text"
     />
   )
