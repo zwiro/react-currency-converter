@@ -1,18 +1,15 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
+import axios from "axios"
 import Select from "react-select"
 
 interface SelectListProps {
   defaultValue: string
+  value: string
+  setCurrency: (value: string) => void
 }
 
-const SelectList = ({ defaultValue }: SelectListProps) => {
-  type OptionType = {
-    value: string
-    label: string
-  }
-
-  const [options, setOptions] = useState<OptionType[]>([])
+const SelectList = ({ defaultValue, value, setCurrency }: SelectListProps) => {
+  const [availableOptions, setAvailableOptions] = useState([])
 
   useEffect(() => {
     const getCurrencies = async () => {
@@ -28,18 +25,20 @@ const SelectList = ({ defaultValue }: SelectListProps) => {
           label: code[0],
         }))
 
-        setOptions(codes)
+        setAvailableOptions(codes)
       } catch (error) {
         console.log(error)
       }
     }
 
     getCurrencies()
-  }, [])
+  }, [setAvailableOptions])
 
   return (
     <Select
-      options={options}
+      options={availableOptions}
+      value={{ value: value, label: value }}
+      onChange={(value) => setCurrency(value!.value)}
       defaultValue={{ value: defaultValue, label: defaultValue }}
       styles={{
         control: (base) => ({
@@ -51,6 +50,7 @@ const SelectList = ({ defaultValue }: SelectListProps) => {
           borderRadius: "1.5rem",
           boxShadow: "0px 4px 5px 2px #241468",
           textAlign: "center",
+          fontSize: "0.85rem",
         }),
         menu: (base) => ({
           ...base,
