@@ -4,4 +4,18 @@
   width: clamp(9rem, 5.843vw + 7.576rem, 12.25rem);
   font-size: clamp(1rem, 1.798vw + 0.562rem, 2rem);
   @include border($dark-blue, 1px);
+  transition: all 0.1s ease-in-out;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    background-color: $dark-magenta;
+    color: $light-pink;
+  }
+
+  &:active {
+    transform: translateY(0.25rem);
+    box-shadow: none;
+    border: none;
+  }
 }
