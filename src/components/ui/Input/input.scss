@@ -3,4 +3,9 @@
 .input {
   width: 100%;
   @include border($dark-blue, 3px);
+
+  &:focus-visible {
+    outline: none;
+    border-color: $light-pink;
+  }
 }

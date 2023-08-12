@@ -41,12 +41,12 @@ const SelectList = ({ defaultValue, value, setCurrency }: SelectListProps) => {
       onChange={(value) => setCurrency(value!.value)}
       defaultValue={{ value: defaultValue, label: defaultValue }}
       styles={{
-        control: (base) => ({
+        control: (base, state) => ({
           ...base,
           backgroundColor: "transparent",
           height: "4.5rem",
           width: "clamp(4.5rem, 2.697vw + 3.843rem, 6rem)",
-          border: "3px solid #241468",
+          border: state.isFocused ? "3px solid #F79BD3" : "3px solid #241468",
           borderRadius: "1.5rem",
           boxShadow: "0px 4px 5px 2px #241468",
           textAlign: "center",
