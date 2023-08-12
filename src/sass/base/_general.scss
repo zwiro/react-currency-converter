@@ -16,8 +16,12 @@ body {
 
 .heading {
   @include text-gradient(135deg, $light-pink, $white);
+  font-size: clamp(2.25rem, 3.146vw + 1.483rem, 4rem);
+  width: min-content;
+  margin-inline: auto;
 }
 
 .main {
-  margin-block: auto;
+  margin: auto;
+  max-width: 30rem;
 }

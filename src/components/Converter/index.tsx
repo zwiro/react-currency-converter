@@ -1,11 +1,11 @@
 import { useAtom } from "jotai"
-import Input from "../ui/Input"
-import SelectList from "../ui/Select"
-import "./converter.scss"
 import {
   convertedFromCurrencyAtom,
   convertedToCurrencyAtom,
 } from "@/jotai/atoms"
+import Input from "../ui/Input"
+import SelectList from "../ui/Select"
+import "./converter.scss"
 
 const Converter = () => {
   const [convertedFromCurrency, setConvertedFromCurrency] = useAtom(
@@ -46,7 +46,7 @@ const ConverterInput = ({
   setCurrency,
 }: ConverterInputProps) => {
   return (
-    <div className="flex-between">
+    <div className="converter__input">
       <Input />
       <SelectList
         defaultValue={defaultValue}

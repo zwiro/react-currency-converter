@@ -1,6 +1,6 @@
 @use "@/sass/abstracts/" as *;
 
 .input {
-  width: 14rem;
+  width: 100%;
   @include border($dark-blue, 3px);
 }

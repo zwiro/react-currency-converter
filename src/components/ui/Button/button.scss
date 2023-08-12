@@ -1,6 +1,7 @@
 @use "@/sass/abstracts/" as *;
 
 .button {
-  width: 9rem;
+  width: clamp(9rem, 5.843vw + 7.576rem, 12.25rem);
+  font-size: clamp(1rem, 1.798vw + 0.562rem, 2rem);
   @include border($dark-blue, 1px);
 }

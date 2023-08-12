@@ -1,8 +1,17 @@
 @use "@/sass/abstracts/" as *;
 
 .converter {
+  margin-inline: auto;
+
   &__divider {
     letter-spacing: 3px;
+    font-size: clamp(1rem, 1.798vw + 0.562rem, 2rem);
     @include text-gradient(45deg, $light-pink, $white);
+  }
+
+  &__input {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
   }
 }
