@@ -14,11 +14,11 @@
   }
 
   &:before {
-    @include gradient(90deg, $light-pink, $white, 2);
+    @include gradient(90deg, $light-pink, $dark-blue, 2);
     margin-left: auto;
   }
 
   &:after {
-    @include gradient(90deg, $white, $light-pink, 2);
+    @include gradient(90deg, $dark-blue, $light-pink, 2);
   }
 }

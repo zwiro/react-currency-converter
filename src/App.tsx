@@ -1,6 +1,7 @@
 import ActionButtons from "./components/ActionButtons"
 import Converter from "./components/Converter"
 import ExchangeRate from "./components/ExchangeRate"
+import githubLogo from "./assets/github-mark-white.svg"
 
 function App() {
   return (
@@ -13,6 +14,15 @@ function App() {
         <ExchangeRate />
         <ActionButtons />
       </main>
+      <footer className="footer">
+        <a
+          href="https://github.com/zwiro"
+          className="footer__link | text-white"
+        >
+          <img src={githubLogo} className="footer__logo" alt="" />
+          zwiro
+        </a>
+      </footer>
     </>
   )
 }

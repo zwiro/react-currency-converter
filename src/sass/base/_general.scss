@@ -25,3 +25,33 @@ body {
   margin: auto;
   max-width: 30rem;
 }
+
+.footer {
+  $footer-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $footer-height;
+
+  &::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $footer-height;
+    background-color: $dark-blue;
+  }
+
+  &__link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__logo {
+    height: calc($footer-height - 1.5rem);
+  }
+}
