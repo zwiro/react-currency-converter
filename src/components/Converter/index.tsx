@@ -22,13 +22,13 @@ const Converter = () => {
   useEffect(() => {
     const getCurrencies = async () => {
       try {
-        const response = await axios.get(
+        const { data } = await axios.get(
           `https://v6.exchangerate-api.com/v6/${
             import.meta.env.VITE_EXCHANGE_RATE_API_KEY
           }/codes`
         )
 
-        const codes = response.data.supported_codes.map((code: string[]) => ({
+        const codes = data.supported_codes.map((code: string[]) => ({
           value: code[0],
           label: code[0],
         }))
@@ -45,45 +45,67 @@ const Converter = () => {
   return (
     <div className="converter">
       <ConverterInput
-        defaultValue="USD"
-        value={convertedFromCurrency}
+        defaultCurrency="USD"
+        selectListValue={convertedFromCurrency}
         setCurrency={setConvertedFromCurrency}
         availableOptions={availableOptions}
+        defaultCurrencyValue={1}
+        testId={1}
       />
       <h2 className="converter__divider | uppercase text-center py-10">
         Is equal to
       </h2>
       <ConverterInput
-        defaultValue="EUR"
-        value={convertedToCurrency}
+        defaultCurrency="EUR"
+        selectListValue={convertedToCurrency}
         setCurrency={setConvertedToCurrency}
         availableOptions={availableOptions}
+        testId={2}
       />
     </div>
   )
 }
 
 interface ConverterInputProps {
-  defaultValue: string
-  value: string
+  defaultCurrency: string
+  selectListValue: string
   setCurrency: (value: string) => void
   availableOptions: { value: string; label: string }[]
+  defaultCurrencyValue?: number
+  testId: number
 }
 
 const ConverterInput = ({
-  defaultValue,
-  value,
+  defaultCurrency,
+  selectListValue,
   setCurrency,
   availableOptions,
+  defaultCurrencyValue,
+  testId,
 }: ConverterInputProps) => {
+  const [value, setValue] = useState(defaultCurrencyValue || "")
+
+  const fontSize =
+    value.toString().length > 11
+      ? "text-base"
+      : value.toString().length > 7
+      ? "text-2xl"
+      : "text-4xl"
+
   return (
     <div className="converter__input">
-      <Input />
-      <SelectList
-        defaultValue={defaultValue}
+      <Input
         value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className={fontSize}
+        aria-label={`Type the value to convert (${testId})`}
+      />
+      <SelectList
+        defaultValue={defaultCurrency}
+        value={selectListValue}
         setCurrency={setCurrency}
         availableOptions={availableOptions}
+        data-testid="select-list"
       />
     </div>
   )
