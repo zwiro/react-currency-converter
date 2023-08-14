@@ -1,39 +1,18 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
 import Select from "react-select"
 
 interface SelectListProps {
   defaultValue: string
   value: string
   setCurrency: (value: string) => void
+  availableOptions: { value: string; label: string }[]
 }
 
-const SelectList = ({ defaultValue, value, setCurrency }: SelectListProps) => {
-  const [availableOptions, setAvailableOptions] = useState([])
-
-  useEffect(() => {
-    const getCurrencies = async () => {
-      try {
-        const response = await axios.get(
-          `https://v6.exchangerate-api.com/v6/${
-            import.meta.env.VITE_EXCHANGE_RATE_API_KEY
-          }/codes`
-        )
-
-        const codes = response.data.supported_codes.map((code: string[]) => ({
-          value: code[0],
-          label: code[0],
-        }))
-
-        setAvailableOptions(codes)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    getCurrencies()
-  }, [setAvailableOptions])
-
+const SelectList = ({
+  defaultValue,
+  value,
+  setCurrency,
+  availableOptions,
+}: SelectListProps) => {
   return (
     <Select
       options={availableOptions}

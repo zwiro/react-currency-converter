@@ -17,6 +17,7 @@ function App() {
       <footer className="footer">
         <a
           href="https://github.com/zwiro"
+          target="_blank"
           className="footer__link | text-white"
         >
           <img src={githubLogo} className="footer__logo" alt="" />
