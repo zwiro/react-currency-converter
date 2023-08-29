@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { forwardRef, useEffect, useRef, useState } from "react"
 import { useAtom } from "jotai"
 import {
   convertedFromCurrencyAtom,
@@ -17,9 +17,14 @@ const Converter = () => {
   const [convertedToCurrency, setConvertedToCurrency] = useAtom(
     convertedToCurrencyAtom
   )
-  const [exchangeRate, setExchangeRate] = useAtom(exchangeRateAtom)
+  const [exchangeRate] = useAtom(exchangeRateAtom)
 
   const [availableOptions, setAvailableOptions] = useState([])
+  const [firstInputValue, setFirstInputValue] = useState("")
+  const [secondInputValue, setSecondInputValue] = useState("")
+
+  const firstInputRef = useRef<HTMLInputElement>(null)
+  const secondInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const getCurrencies = async () => {
@@ -45,22 +50,18 @@ const Converter = () => {
   }, [setAvailableOptions])
 
   useEffect(() => {
-    const getConvertedValue = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://v6.exchangerate-api.com/v6/${
-            import.meta.env.VITE_EXCHANGE_RATE_API_KEY
-          }/pair/${convertedFromCurrency}/${convertedToCurrency}`
-        )
-
-        setExchangeRate(data.conversion_rate)
-      } catch (error) {
-        console.log(error)
-      }
+    if (document.activeElement === firstInputRef.current) {
+      const convertedValue = Number(firstInputValue) * exchangeRate
+      setSecondInputValue(convertedValue.toFixed(2))
     }
+  }, [firstInputValue, exchangeRate])
 
-    getConvertedValue()
-  }, [convertedFromCurrency, convertedToCurrency, setExchangeRate])
+  useEffect(() => {
+    if (document.activeElement === secondInputRef.current) {
+      const convertedValue = Number(secondInputValue) * exchangeRate
+      setFirstInputValue(convertedValue.toFixed(2))
+    }
+  }, [secondInputValue, exchangeRate])
 
   return (
     <div className="converter">
@@ -69,8 +70,10 @@ const Converter = () => {
         selectListValue={convertedFromCurrency}
         setCurrency={setConvertedFromCurrency}
         availableOptions={availableOptions}
-        defaultCurrencyValue={"1"}
+        value={firstInputValue}
+        setValue={setFirstInputValue}
         testId={1}
+        ref={firstInputRef}
       />
       <h2 className="converter__divider | uppercase text-center py-10">
         Is equal to
@@ -80,8 +83,10 @@ const Converter = () => {
         selectListValue={convertedToCurrency}
         setCurrency={setConvertedToCurrency}
         availableOptions={availableOptions}
-        defaultCurrencyValue={exchangeRate.toString()}
+        value={secondInputValue}
+        setValue={setSecondInputValue}
         testId={2}
+        ref={secondInputRef}
       />
     </div>
   )
@@ -92,34 +97,39 @@ interface ConverterInputProps {
   selectListValue: string
   setCurrency: (value: string) => void
   availableOptions: { value: string; label: string }[]
-  defaultCurrencyValue: string
+  value: string
+  setValue: (value: string) => void
   testId: number
 }
 
-const ConverterInput = ({
-  defaultCurrency,
-  selectListValue,
-  setCurrency,
-  availableOptions,
-  defaultCurrencyValue,
-  testId,
-}: ConverterInputProps) => {
-  const [value, setValue] = useState(defaultCurrencyValue)
-
+const ConverterInput = forwardRef(function ConverterInput(
+  {
+    defaultCurrency,
+    selectListValue,
+    setCurrency,
+    availableOptions,
+    value,
+    setValue,
+    testId,
+  }: ConverterInputProps,
+  ref: React.Ref<HTMLInputElement>
+) {
   const fontSize =
-    value.toString().length > 11
+    value!.toString().length > 11
       ? "text-base"
-      : value.toString().length > 7
+      : value!.toString().length > 7
       ? "text-2xl"
       : "text-4xl"
 
   return (
-    <div className="converter__input">
+    <div className="converter__input-group">
       <Input
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className={fontSize}
+        placeholder="Type the value to convert"
+        className={`converter__input ${fontSize}`}
         aria-label={`Type the value to convert (${testId})`}
+        ref={ref}
       />
       <SelectList
         defaultValue={defaultCurrency}
@@ -130,6 +140,6 @@ const ConverterInput = ({
       />
     </div>
   )
-}
+})
 
 export default Converter

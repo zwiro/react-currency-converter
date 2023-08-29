@@ -22,7 +22,7 @@ test("on initial render, currencies selected by default are USD and EUR", async 
   expect(await screen.findByText("EUR")).toBeInTheDocument()
 })
 
-test("on initial render, first input's value is 1", async () => {
+test("on initial render, both inputs are empty", async () => {
   act(() => {
     axios.get.mockResolvedValueOnce({ data: mockData })
   })
@@ -33,5 +33,10 @@ test("on initial render, first input's value is 1", async () => {
     await screen.findByRole("textbox", {
       name: /type the value to convert \(1\)/i,
     })
-  ).toHaveValue("1")
+  ).toHaveValue("")
+  expect(
+    await screen.findByRole("textbox", {
+      name: /type the value to convert \(2\)/i,
+    })
+  ).toHaveValue("")
 })

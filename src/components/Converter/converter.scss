@@ -9,9 +9,13 @@
     @include text-gradient(45deg, $light-pink, $white);
   }
 
-  &__input {
+  &__input-group {
     display: flex;
     justify-content: center;
     gap: 1rem;
+  }
+
+  &__input::placeholder {
+    font-size: 1rem;
   }
 }
