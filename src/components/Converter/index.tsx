@@ -3,6 +3,7 @@ import { useAtom } from "jotai"
 import {
   convertedFromCurrencyAtom,
   convertedToCurrencyAtom,
+  exchangeRateAtom,
 } from "@/jotai/atoms"
 import Input from "../ui/Input"
 import SelectList from "../ui/Select"
@@ -16,6 +17,7 @@ const Converter = () => {
   const [convertedToCurrency, setConvertedToCurrency] = useAtom(
     convertedToCurrencyAtom
   )
+  const [exchangeRate, setExchangeRate] = useAtom(exchangeRateAtom)
 
   const [availableOptions, setAvailableOptions] = useState([])
 
@@ -42,6 +44,24 @@ const Converter = () => {
     getCurrencies()
   }, [setAvailableOptions])
 
+  useEffect(() => {
+    const getConvertedValue = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://v6.exchangerate-api.com/v6/${
+            import.meta.env.VITE_EXCHANGE_RATE_API_KEY
+          }/pair/${convertedFromCurrency}/${convertedToCurrency}`
+        )
+
+        setExchangeRate(data.conversion_rate)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getConvertedValue()
+  }, [convertedFromCurrency, convertedToCurrency, setExchangeRate])
+
   return (
     <div className="converter">
       <ConverterInput
@@ -49,7 +69,7 @@ const Converter = () => {
         selectListValue={convertedFromCurrency}
         setCurrency={setConvertedFromCurrency}
         availableOptions={availableOptions}
-        defaultCurrencyValue={1}
+        defaultCurrencyValue={"1"}
         testId={1}
       />
       <h2 className="converter__divider | uppercase text-center py-10">
@@ -60,6 +80,7 @@ const Converter = () => {
         selectListValue={convertedToCurrency}
         setCurrency={setConvertedToCurrency}
         availableOptions={availableOptions}
+        defaultCurrencyValue={exchangeRate.toString()}
         testId={2}
       />
     </div>
@@ -71,7 +92,7 @@ interface ConverterInputProps {
   selectListValue: string
   setCurrency: (value: string) => void
   availableOptions: { value: string; label: string }[]
-  defaultCurrencyValue?: number
+  defaultCurrencyValue: string
   testId: number
 }
 
@@ -83,7 +104,7 @@ const ConverterInput = ({
   defaultCurrencyValue,
   testId,
 }: ConverterInputProps) => {
-  const [value, setValue] = useState(defaultCurrencyValue || "")
+  const [value, setValue] = useState(defaultCurrencyValue)
 
   const fontSize =
     value.toString().length > 11

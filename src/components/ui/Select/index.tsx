@@ -30,6 +30,7 @@ const SelectList = ({
           boxShadow: "0px 4px 5px 2px #241468",
           textAlign: "center",
           fontSize: "clamp(0.85rem, 1.169vw + 0.565rem, 1.5rem)",
+          cursor: "pointer",
         }),
         menu: (base) => ({
           ...base,
