@@ -1,4 +1,6 @@
-import Select from "react-select"
+import { forwardRef } from "react"
+import type { default as SelectType } from "node_modules/react-select/dist/declarations/src/Select"
+import Select, { type GroupBase } from "react-select"
 
 interface SelectListProps {
   defaultValue: string
@@ -7,14 +9,21 @@ interface SelectListProps {
   availableOptions: { value: string; label: string }[]
 }
 
-const SelectList = ({
-  defaultValue,
-  value,
-  setCurrency,
-  availableOptions,
-}: SelectListProps) => {
+const SelectList = forwardRef(function SelectList(
+  { defaultValue, value, setCurrency, availableOptions }: SelectListProps,
+  ref:
+    | React.Ref<
+        SelectType<
+          { value: string; label: string },
+          false,
+          GroupBase<{ value: string; label: string }>
+        >
+      >
+    | undefined
+) {
   return (
     <Select
+      ref={ref}
       options={availableOptions}
       value={{ value: value, label: value }}
       onChange={(value) => setCurrency(value!.value)}
@@ -58,6 +67,6 @@ const SelectList = ({
       }}
     />
   )
-}
+})
 
 export default SelectList

@@ -9,6 +9,8 @@ import Input from "../ui/Input"
 import SelectList from "../ui/Select"
 import "./converter.scss"
 import axios from "axios"
+import { type GroupBase } from "react-select"
+import type Select from "node_modules/react-select/dist/declarations/src/Select"
 
 const Converter = () => {
   const [convertedFromCurrency, setConvertedFromCurrency] = useAtom(
@@ -25,6 +27,23 @@ const Converter = () => {
 
   const firstInputRef = useRef<HTMLInputElement>(null)
   const secondInputRef = useRef<HTMLInputElement>(null)
+
+  const firstSelectListRef =
+    useRef<
+      Select<
+        { value: string; label: string },
+        false,
+        GroupBase<{ value: string; label: string }>
+      >
+    >(null)
+  const secondSelectListRef =
+    useRef<
+      Select<
+        { value: string; label: string },
+        false,
+        GroupBase<{ value: string; label: string }>
+      >
+    >(null)
 
   useEffect(() => {
     const getCurrencies = async () => {
@@ -49,19 +68,28 @@ const Converter = () => {
     getCurrencies()
   }, [setAvailableOptions])
 
+  console.log(firstSelectListRef.current?.state.isFocused)
+  console.log(secondSelectListRef.current?.state.isFocused)
+
   useEffect(() => {
-    if (document.activeElement === firstInputRef.current) {
+    if (
+      document.activeElement === firstInputRef.current ||
+      firstSelectListRef.current?.state.isFocused
+    ) {
       const convertedValue = Number(firstInputValue) * exchangeRate
       setSecondInputValue(convertedValue.toFixed(2))
     }
-  }, [firstInputValue, exchangeRate])
+  }, [firstInputValue, exchangeRate, convertedFromCurrency])
 
   useEffect(() => {
-    if (document.activeElement === secondInputRef.current) {
-      const convertedValue = Number(secondInputValue) * exchangeRate
+    if (
+      document.activeElement === secondInputRef.current ||
+      secondSelectListRef.current?.state.isFocused
+    ) {
+      const convertedValue = Number(secondInputValue) / exchangeRate
       setFirstInputValue(convertedValue.toFixed(2))
     }
-  }, [secondInputValue, exchangeRate])
+  }, [secondInputValue, exchangeRate, convertedToCurrency])
 
   return (
     <div className="converter">
@@ -74,6 +102,7 @@ const Converter = () => {
         setValue={setFirstInputValue}
         testId={1}
         ref={firstInputRef}
+        selectListRef={firstSelectListRef}
       />
       <h2 className="converter__divider | uppercase text-center py-10">
         Is equal to
@@ -87,6 +116,7 @@ const Converter = () => {
         setValue={setSecondInputValue}
         testId={2}
         ref={secondInputRef}
+        selectListRef={secondSelectListRef}
       />
     </div>
   )
@@ -100,6 +130,15 @@ interface ConverterInputProps {
   value: string
   setValue: (value: string) => void
   testId: number
+  selectListRef:
+    | React.Ref<
+        Select<
+          { value: string; label: string },
+          false,
+          GroupBase<{ value: string; label: string }>
+        >
+      >
+    | undefined
 }
 
 const ConverterInput = forwardRef(function ConverterInput(
@@ -111,6 +150,7 @@ const ConverterInput = forwardRef(function ConverterInput(
     value,
     setValue,
     testId,
+    selectListRef,
   }: ConverterInputProps,
   ref: React.Ref<HTMLInputElement>
 ) {
@@ -137,6 +177,7 @@ const ConverterInput = forwardRef(function ConverterInput(
         setCurrency={setCurrency}
         availableOptions={availableOptions}
         data-testid="select-list"
+        ref={selectListRef}
       />
     </div>
   )
