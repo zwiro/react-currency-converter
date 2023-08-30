@@ -68,9 +68,6 @@ const Converter = () => {
     getCurrencies()
   }, [setAvailableOptions])
 
-  console.log(firstSelectListRef.current?.state.isFocused)
-  console.log(secondSelectListRef.current?.state.isFocused)
-
   useEffect(() => {
     if (
       document.activeElement === firstInputRef.current ||
