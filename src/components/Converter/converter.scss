@@ -4,6 +4,12 @@
   margin-inline: auto;
 
   &__divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__divider-text {
     letter-spacing: 3px;
     font-size: clamp(1rem, 1.798vw + 0.562rem, 2rem);
     @include text-gradient(45deg, $light-pink, $white);
@@ -17,5 +23,23 @@
 
   &__input::placeholder {
     font-size: 1rem;
+  }
+
+  &__arrow-btn {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 1rem;
+    filter: invert(79%) sepia(10%) saturate(3010%) hue-rotate(288deg)
+      brightness(105%) contrast(94%);
+    transition: scale 0.2s ease-in-out;
+
+    &:first-of-type {
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      scale: 1.5;
+    }
   }
 }

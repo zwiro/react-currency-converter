@@ -88,6 +88,18 @@ const Converter = () => {
     }
   }, [secondInputValue, exchangeRate, convertedToCurrency])
 
+  const moveValueToSecondInput = () => {
+    setSecondInputValue(firstInputValue)
+    const convertedValue = Number(firstInputValue) / exchangeRate
+    setFirstInputValue(convertedValue.toFixed(2))
+  }
+
+  const moveValueToFirstInput = () => {
+    setFirstInputValue(secondInputValue)
+    const convertedValue = Number(secondInputValue) * exchangeRate
+    setSecondInputValue(convertedValue.toFixed(2))
+  }
+
   return (
     <div className="converter">
       <ConverterInput
@@ -101,9 +113,25 @@ const Converter = () => {
         ref={firstInputRef}
         selectListRef={firstSelectListRef}
       />
-      <h2 className="converter__divider | uppercase text-center py-10">
-        Is equal to
-      </h2>
+      <div className="converter__divider">
+        <button
+          className="converter__arrow-btn converter__arrow-btn--rotated"
+          aria-label="Move value to second input"
+          onClick={moveValueToSecondInput}
+        >
+          <img src="src/assets/arrow.svg" alt="Arrow pointing down" />
+        </button>
+        <h2 className="converter__divider-text | uppercase py-5">
+          Is equal to
+        </h2>
+        <button
+          className="converter__arrow-btn"
+          aria-label="Move value to first input"
+          onClick={moveValueToFirstInput}
+        >
+          <img src="src/assets/arrow.svg" alt="Arrow pointing up" />
+        </button>
+      </div>
       <ConverterInput
         defaultCurrency="EUR"
         selectListValue={convertedToCurrency}
@@ -168,12 +196,12 @@ const ConverterInput = forwardRef(function ConverterInput(
         aria-label={`Type the value to convert (${testId})`}
         ref={ref}
       />
+
       <SelectList
         defaultValue={defaultCurrency}
         value={selectListValue}
         setCurrency={setCurrency}
         availableOptions={availableOptions}
-        data-testid="select-list"
         ref={selectListRef}
       />
     </div>

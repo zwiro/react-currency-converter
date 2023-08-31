@@ -53,7 +53,7 @@ const ConverterWithExchangeRate = () => (
 )
 
 test("when typing value in one input, converted value is appearing in another input", async () => {
-  axios.get.mockResolvedValueOnce({ data: mockData })
+  axios.get.mockResolvedValue({ data: mockData })
 
   render(<ConverterWithExchangeRate />)
 
