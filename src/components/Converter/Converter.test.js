@@ -80,3 +80,32 @@ test("when typing value in one input, converted value is appearing in another in
   expect(input1).toHaveValue((mockValue / mockData.conversion_rate).toFixed(2))
   expect(input2).toHaveValue(mockValue)
 })
+
+test("when swapping input values, swapped value is converted", async () => {
+  axios.get.mockResolvedValue({ data: mockData })
+
+  render(<Converter />)
+
+  const input1 = await screen.findByRole("textbox", {
+    name: /type the value to convert \(1\)/i,
+  })
+
+  const input2 = await screen.findByRole("textbox", {
+    name: /type the value to convert \(2\)/i,
+  })
+
+  const mockValue = "1"
+
+  await user.type(input1, mockValue)
+  await user.click(
+    screen.getByRole("button", { name: /move value to second input/i })
+  )
+
+  expect(input2).toHaveValue(mockValue)
+
+  await user.click(
+    screen.getByRole("button", { name: /move value to first input/i })
+  )
+
+  expect(input1).toHaveValue(mockValue)
+})
