@@ -32,7 +32,10 @@ const ExchangeRate = () => {
   }, [convertedFromCurrency, convertedToCurrency, setExchangeRate])
 
   return (
-    <h2 className="exchange-rate | text-center py-9">
+    <h2
+      className="exchange-rate | text-center py-9"
+      data-testid="exchange-rate"
+    >
       1 {convertedFromCurrency} = {exchangeRate} {convertedToCurrency}
     </h2>
   )

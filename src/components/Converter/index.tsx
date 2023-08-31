@@ -121,9 +121,7 @@ const Converter = () => {
         >
           <img src="src/assets/arrow.svg" alt="Arrow pointing down" />
         </button>
-        <h2 className="converter__divider-text | uppercase py-5">
-          Is equal to
-        </h2>
+        <p className="converter__divider-text | uppercase py-5">Is equal to</p>
         <button
           className="converter__arrow-btn"
           aria-label="Move value to first input"
