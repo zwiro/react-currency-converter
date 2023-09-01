@@ -5,15 +5,19 @@ import {
   convertedToCurrencyAtom,
   exchangeRateAtom,
 } from "@/jotai/atoms"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
+import LoadingSpinner from "../LoadingSpinner"
 
 const ExchangeRate = () => {
   const [convertedFromCurrency] = useAtom(convertedFromCurrencyAtom)
   const [convertedToCurrency] = useAtom(convertedToCurrencyAtom)
   const [exchangeRate, setExchangeRate] = useAtom(exchangeRateAtom)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   useEffect(() => {
+    setIsLoading(true)
     const getConvertedValue = async () => {
       try {
         const { data } = await axios.get(
@@ -23,6 +27,7 @@ const ExchangeRate = () => {
         )
 
         setExchangeRate(data.conversion_rate)
+        setIsLoading(false)
       } catch (error) {
         console.log(error)
       }
@@ -36,7 +41,11 @@ const ExchangeRate = () => {
       className="exchange-rate | text-center py-9"
       data-testid="exchange-rate"
     >
-      1 {convertedFromCurrency} = {exchangeRate} {convertedToCurrency}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        `1 ${convertedFromCurrency} = ${exchangeRate} ${convertedToCurrency}`
+      )}
     </h2>
   )
 }

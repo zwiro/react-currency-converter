@@ -3,6 +3,7 @@
 .exchange-rate {
   @include text-gradient(45deg, $light-pink, $white);
   font-size: clamp(1rem, 1.798vw + 0.562rem, 2rem);
+  height: 10rem;
 
   &:after,
   &:before {

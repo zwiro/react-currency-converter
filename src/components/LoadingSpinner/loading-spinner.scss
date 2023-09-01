@@ -1,0 +1,31 @@
+@use "@/sass/abstracts/" as *;
+
+.loading-spinner {
+  height: clamp(1rem, 1.798vw + 0.562rem, 2rem);
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  border: 3px solid $light-pink;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite;
+  margin-inline: auto;
+
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: $dark-magenta;
+    height: 50%;
+    width: 50%;
+    top: 80%;
+    border-radius: 50%;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
