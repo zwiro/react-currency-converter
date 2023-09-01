@@ -13,7 +13,11 @@ import axios from "axios"
 import { type GroupBase } from "react-select"
 import type Select from "node_modules/react-select/dist/declarations/src/Select"
 
-const Converter = () => {
+interface ConverterProps {
+  inputsToClear: boolean
+}
+
+const Converter = ({ inputsToClear }: ConverterProps) => {
   const [convertedFromCurrency, setConvertedFromCurrency] = useAtom(
     convertedFromCurrencyAtom
   )
@@ -93,6 +97,13 @@ const Converter = () => {
   useEffect(() => {
     setValueToCopy(secondInputValue)
   }, [secondInputValue, setValueToCopy])
+
+  useEffect(() => {
+    if (inputsToClear) {
+      setFirstInputValue("")
+      setSecondInputValue("")
+    }
+  }, [inputsToClear])
 
   const moveValueToSecondInput = () => {
     setSecondInputValue(firstInputValue)

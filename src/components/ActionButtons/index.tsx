@@ -3,7 +3,11 @@ import Button from "../ui/Button"
 import { convertedToCurrencyAtom, valueToCopyAtom } from "@/jotai/atoms"
 import CopyToClipboard from "react-copy-to-clipboard"
 
-const ActionButtons = () => {
+interface ActionButtonsProps {
+  setInputsToClear: (value: boolean) => void
+}
+
+const ActionButtons = ({ setInputsToClear }: ActionButtonsProps) => {
   const [valueToCopy] = useAtom(valueToCopyAtom)
   const [convertedToCurrency] = useAtom(convertedToCurrencyAtom)
 
@@ -12,7 +16,15 @@ const ActionButtons = () => {
       <CopyToClipboard text={`${valueToCopy} ${convertedToCurrency}`}>
         <Button title="Copy" />
       </CopyToClipboard>
-      <Button title="Clear" />
+      <Button
+        title="Clear"
+        onClick={() => {
+          setInputsToClear(true)
+          setTimeout(() => {
+            setInputsToClear(false)
+          }, 0)
+        }}
+      />
     </div>
   )
 }
