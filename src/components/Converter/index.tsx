@@ -4,6 +4,7 @@ import {
   convertedFromCurrencyAtom,
   convertedToCurrencyAtom,
   exchangeRateAtom,
+  valueToCopyAtom,
 } from "@/jotai/atoms"
 import Input from "../ui/Input"
 import SelectList from "../ui/Select"
@@ -20,6 +21,7 @@ const Converter = () => {
     convertedToCurrencyAtom
   )
   const [exchangeRate] = useAtom(exchangeRateAtom)
+  const [, setValueToCopy] = useAtom(valueToCopyAtom)
 
   const [availableOptions, setAvailableOptions] = useState([])
   const [firstInputValue, setFirstInputValue] = useState("")
@@ -87,6 +89,10 @@ const Converter = () => {
       setFirstInputValue(convertedValue.toFixed(2))
     }
   }, [secondInputValue, exchangeRate, convertedToCurrency])
+
+  useEffect(() => {
+    setValueToCopy(secondInputValue)
+  }, [secondInputValue, setValueToCopy])
 
   const moveValueToSecondInput = () => {
     setSecondInputValue(firstInputValue)
@@ -179,7 +185,7 @@ const ConverterInput = forwardRef(function ConverterInput(
 ) {
   const fontSize =
     value!.toString().length > 11
-      ? "text-base"
+      ? "text-sm"
       : value!.toString().length > 7
       ? "text-2xl"
       : "text-4xl"

@@ -33,7 +33,7 @@ const SelectList = forwardRef(function SelectList(
           ...base,
           backgroundColor: "transparent",
           height: "4.5rem",
-          width: "clamp(4.5rem, 2.697vw + 3.843rem, 6rem)",
+          width: "clamp(4.5rem, 3vw + 4rem, 7rem)",
           border: state.isFocused ? "3px solid #F79BD3" : "3px solid #241468",
           borderRadius: "1.5rem",
           boxShadow: "0px 4px 5px 2px #241468",

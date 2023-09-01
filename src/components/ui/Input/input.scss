@@ -4,6 +4,10 @@
   width: 100%;
   @include border($dark-blue, 3px);
 
+  &::placeholder {
+    font-size: 0.75rem !important;
+  }
+
   &:focus-visible {
     outline: none;
     border-color: $light-pink;
