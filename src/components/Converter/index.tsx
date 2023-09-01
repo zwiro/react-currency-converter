@@ -184,11 +184,31 @@ const ConverterInput = forwardRef(function ConverterInput(
       ? "text-2xl"
       : "text-4xl"
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = e.target.value
+    newValue = newValue.replace(/,/g, ".")
+    newValue = newValue.replace(/[^0-9.]/g, "")
+    if (newValue.startsWith(".")) {
+      newValue = "0" + newValue
+    }
+    if (newValue.split(".").length > 2) {
+      newValue = newValue.split(".")[0] + "." + newValue.split(".")[1]
+    }
+    if (
+      newValue.includes("0") &&
+      newValue.length > 1 &&
+      !newValue.includes(".")
+    ) {
+      newValue = newValue.replace(/^0?/, "")
+    }
+    setValue(newValue)
+  }
+
   return (
     <div className="converter__input-group">
       <Input
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         placeholder="Type the value to convert"
         className={`converter__input ${fontSize}`}
         aria-label={`Type the value to convert (${testId})`}
