@@ -32,14 +32,15 @@ body {
   align-items: center;
   justify-content: center;
   height: $footer-height;
+  position: relative;
 
   &::after {
     content: "";
     z-index: -1;
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: -2.25rem;
+    right: -2.25rem;
     height: $footer-height;
     background-color: $dark-blue;
   }

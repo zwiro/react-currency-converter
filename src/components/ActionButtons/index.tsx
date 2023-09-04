@@ -12,7 +12,7 @@ const ActionButtons = ({ setInputsToClear }: ActionButtonsProps) => {
   const [convertedToCurrency] = useAtom(convertedToCurrencyAtom)
 
   return (
-    <div className="flex-between">
+    <div className="flex-between | mb-4">
       <CopyToClipboard text={`${valueToCopy} ${convertedToCurrency}`}>
         <Button title="Copy" />
       </CopyToClipboard>
