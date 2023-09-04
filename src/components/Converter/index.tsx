@@ -1,4 +1,6 @@
 import { forwardRef, useEffect, useRef, useState } from "react"
+import axios from "axios"
+import { type GroupBase } from "react-select"
 import { useAtom } from "jotai"
 import {
   convertedFromCurrencyAtom,
@@ -9,8 +11,6 @@ import {
 import Input from "../ui/Input"
 import SelectList from "../ui/Select"
 import "./converter.scss"
-import axios from "axios"
-import { type GroupBase } from "react-select"
 import type Select from "node_modules/react-select/dist/declarations/src/Select"
 
 interface ConverterProps {

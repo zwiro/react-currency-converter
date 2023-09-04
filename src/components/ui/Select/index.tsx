@@ -1,6 +1,6 @@
 import { forwardRef } from "react"
-import type { default as SelectType } from "node_modules/react-select/dist/declarations/src/Select"
 import Select, { type GroupBase } from "react-select"
+import type { default as SelectType } from "node_modules/react-select/dist/declarations/src/Select"
 
 interface SelectListProps {
   defaultValue: string

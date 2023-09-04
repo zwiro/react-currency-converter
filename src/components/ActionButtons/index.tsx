@@ -1,7 +1,7 @@
 import { useAtom } from "jotai"
-import Button from "../ui/Button"
-import { convertedToCurrencyAtom, valueToCopyAtom } from "@/jotai/atoms"
 import CopyToClipboard from "react-copy-to-clipboard"
+import { convertedToCurrencyAtom, valueToCopyAtom } from "@/jotai/atoms"
+import Button from "../ui/Button"
 
 interface ActionButtonsProps {
   setInputsToClear: (value: boolean) => void

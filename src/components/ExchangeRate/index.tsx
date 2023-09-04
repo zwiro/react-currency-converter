@@ -1,12 +1,12 @@
 import { useAtom } from "jotai"
+import axios from "axios"
+import { useEffect, useState } from "react"
 import "./exchange-rate.scss"
 import {
   convertedFromCurrencyAtom,
   convertedToCurrencyAtom,
   exchangeRateAtom,
 } from "@/jotai/atoms"
-import { useEffect, useState } from "react"
-import axios from "axios"
 import LoadingSpinner from "../LoadingSpinner"
 
 const ExchangeRate = () => {
