@@ -137,7 +137,11 @@ const Converter = ({ inputsToClear }: ConverterProps) => {
           aria-label="Move value to second input"
           onClick={moveValueToSecondInput}
         >
-          <img src={arrowIcon} alt="Arrow pointing down" />
+          <img
+            src={arrowIcon}
+            alt="Arrow pointing down"
+            className="converter__arrow-icon"
+          />
         </button>
         <p className="converter__divider-text | uppercase py-5">Is equal to</p>
         <button
@@ -145,7 +149,11 @@ const Converter = ({ inputsToClear }: ConverterProps) => {
           aria-label="Move value to first input"
           onClick={moveValueToFirstInput}
         >
-          <img src={arrowIcon} alt="Arrow pointing up" />
+          <img
+            src={arrowIcon}
+            alt="Arrow pointing up"
+            className="converter__arrow-icon"
+          />
         </button>
       </div>
       <ConverterInput
