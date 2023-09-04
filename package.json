@@ -1,4 +1,5 @@
 {
+  "homepage": "https://zwiro.github.io/react-currency-converter/",
   "name": "react-currency-converter",
   "private": true,
   "version": "0.0.0",
@@ -9,7 +10,9 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@types/testing-library__jest-dom": "^5.14.9",
