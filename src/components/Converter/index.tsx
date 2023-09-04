@@ -8,10 +8,11 @@ import {
   exchangeRateAtom,
   valueToCopyAtom,
 } from "@/jotai/atoms"
+import type Select from "node_modules/react-select/dist/declarations/src/Select"
 import Input from "../ui/Input"
 import SelectList from "../ui/Select"
+import arrowIcon from "@/assets/arrow.svg"
 import "./converter.scss"
-import type Select from "node_modules/react-select/dist/declarations/src/Select"
 
 interface ConverterProps {
   inputsToClear: boolean
@@ -136,7 +137,7 @@ const Converter = ({ inputsToClear }: ConverterProps) => {
           aria-label="Move value to second input"
           onClick={moveValueToSecondInput}
         >
-          <img src="src/assets/arrow.svg" alt="Arrow pointing down" />
+          <img src={arrowIcon} alt="Arrow pointing down" />
         </button>
         <p className="converter__divider-text | uppercase py-5">Is equal to</p>
         <button
@@ -144,7 +145,7 @@ const Converter = ({ inputsToClear }: ConverterProps) => {
           aria-label="Move value to first input"
           onClick={moveValueToFirstInput}
         >
-          <img src="src/assets/arrow.svg" alt="Arrow pointing up" />
+          <img src={arrowIcon} alt="Arrow pointing up" />
         </button>
       </div>
       <ConverterInput
